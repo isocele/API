@@ -1,43 +1,5 @@
 # Epicare
 
-## MVP
-
-    Système de communication entre le médecin et patient en post opératoire -> Plus ou moins Skype
-    Système d'ordonnance en ligne pouvant être délivré directement
-
-    -> A présenter en Février 2019
-
-## Forward
-
-### Java
-
-    Système d'ordonnance:
-        -> Upload image de tampon
-        -> Signature
-
-    3 types de comptes:
-        -> Médecin
-        -> Pharmacien
-        -> Patient
-        -> db SQL
-
-    Back-end en Node ( SQL )
-
-### Communication
-
-    Powerpoint de presentation
-    Proto Sketch
-
-    Retours utilisateurs:
-        -> Tek1 random en SM25
-        -> Pharmaciens / médecins
-
-    Retours d'expérience:
-        -> Voir des médecins (parents de JB)
-        -> Patients en post opé
-
-    Si possible récupérer des adresses mail
-
 ## Assignations
 
 ### Front UX & UA
@@ -46,6 +8,7 @@
     Alexandre Gueguen
     Kentin Pratelli
     Marc Perez
+    Maxence Fourrier
 
 ### Collecte de retours
 
@@ -55,8 +18,7 @@
 ### Back Serveur / SQL
 
     -> SQL / Serveur / Appli
-    Killian Gardaut
-    Maxence Fourrier
+    Killian Gardahaut
     Philippe De Sousa Violante
     Tanguy d'Auria
 
