@@ -23,8 +23,8 @@
     Tanguy d'Auria
 
 
-# Présentation du gitlab
-Présentation du fonctionnement du gitlab et de la procédure de push
+# Présentation du github
+Présentation du fonctionnement du github et de la procédure de push
 
 ## Présentation
 
