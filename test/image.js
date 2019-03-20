@@ -8,14 +8,15 @@ var should = chai.should()
 
 var client = restify.createJsonClient('http://localhost:8080');
 
-client.basicAuth('$login', '$password');
-
 describe('GET /order/:file', () => {
 	describe('Get an order', () => {
-		it('Should return an image if :file exist', (done) => {
+		it('Should return nothing and code 500 when file does not exists', (done) => {
 			client.get('/order/salut', function(err, req, res, data) {
 				res.statusCode.should.equal(500)
 			})
+			done()
+		})
+		it('Should return and image when the file exists', (done) => {
 			client.get('/order/TestFile.jpg', function(err, req, res, data) {
 				res.statusCode.should.equal(200)
 			})
@@ -26,10 +27,13 @@ describe('GET /order/:file', () => {
 
 describe('GET /orders/:username', () => {
 	describe('Get all orders of a username', () => {
-		it('Should return all orders of someone base on his username', (done) => {
+		it('Should return code 500 for someone who does not exists', (done) => {
 			client.get('/orders/bonjourjesuispersonne', function(err, req, res, data) {
 				res.statusCode.should.equal(500)
 			})
+			done()
+		})
+		it('Should return code 200 for some who exists', (done) => {
 			client.get('/orders/TestFile', function(err, req, res, data) {
 				res.statusCode.should.equal(200)
 			})
@@ -37,3 +41,4 @@ describe('GET /orders/:username', () => {
 		})
 	})
 })
+console.log("jsuisla")
