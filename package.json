@@ -4,22 +4,29 @@
   "description": "## Assignations",
   "main": "app.js",
   "dependencies": {
-    "async": "^2.6.1",
+    "async": "^2.6.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "commander": "^2.19.0",
     "g": "^2.0.1",
     "multer": "^1.4.1",
     "multi-rest": "^2.0.2",
     "mysql": "^2.16.0",
     "node-cmd": "^3.0.0",
-    "nodemon": "^1.18.8",
+    "node-coverage": "^2.1.0",
+    "nodemon": "^1.18.10",
     "request": "^2.88.0",
-    "restify": "^7.3.0",
+    "restify": "^7.7.0",
+    "restify-clients": "^2.6.4",
+    "restify-plugins": "^1.6.0",
     "restify-router": "^0.5.1",
     "serve-static-restify": "^3.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nyc": "^13.3.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reportet=text mocha"
   },
   "repository": {
     "type": "git",
