@@ -8,6 +8,11 @@ var should = chai.should()
 
 var client = restify.createJsonClient('http://localhost:8080');
 
+after(function (done) {
+	server.close()
+	done()
+})
+
 describe('GET /order/:file', () => {
 	describe('Get an order', () => {
 		it('Should return nothing and code 500 when file does not exists', (done) => {
@@ -41,4 +46,3 @@ describe('GET /orders/:username', () => {
 		})
 	})
 })
-console.log("jsuisla")
