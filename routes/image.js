@@ -15,7 +15,7 @@ router.get('/orders/:username', (req, res, next) => {
 			files.push(fileName)
 		}
 	})
-	if (files.length === 0){
+	if (files.length == 0){
 		res.status(500)
 		res.send('Nothing')
 		return next()
