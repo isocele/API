@@ -15,8 +15,14 @@ router.get('/orders/:username', (req, res, next) => {
 			files.push(fileName)
 		}
 	})
+	if (files.length === 0){
+		res.status(500)
+		res.send('Nothing')
+		return next()
+	}
+	res.status(200)
 	res.send(files)
-	next()
+	return next()
 })
 
 router.get("/order/:file", (req, res, next) => {
@@ -27,7 +33,7 @@ router.get("/order/:file", (req, res, next) => {
 			res.send("Error while getting image")
 			return next()
 		}
-
+		res.status(200)
 		res.write(file)
 		res.end()
 		return next()

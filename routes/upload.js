@@ -31,6 +31,7 @@ router.post('/upload', (req, res, next) => {
 	fs.writeFile(filepath, uploaded_file, (err) => {
 		if (err) console.log("Error downloading file") // writing received file
 	})
+	res.status(200)
 	res.send("Success")
 	next() // next()
 })

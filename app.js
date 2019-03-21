@@ -29,6 +29,8 @@ user.router.applyRoutes(server)
 image.router.applyRoutes(server)
 chat.router.applyRoutes(server)
 
-server.listen(8080, function () {
+let servers = server.listen(8080, function () {
 	console.log('%s listening at %s', server.name, server.url)
 })
+
+module.exports = servers
