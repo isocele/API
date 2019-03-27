@@ -42,16 +42,18 @@ router.post('/send_message', (req, res, next) => {
 	next()
 });
 
-router.get('/get_message/:username',(req, res, next) => {
+router.get('/get_message/:username',async (req, res, next) => {
 	var username = req.params.username
 
 	const queryString = "SELECT * FROM (SELECT * FROM messages WHERE target=? ORDER BY id DESC LIMIT 10) sub ORDER BY id ASC"
 
-	sql.db.get.query(queryString, [username], function (err, result, fields) {
-		if (err) {
-			console.log(err)
+	await sql.db.get.query(queryString, [username], function (err, result, fields) {
+		if (err || result.length <= 0) {
+			res.status(504)
+			res.send("Error")
 			return next()
 		} else {
+			res.status(200)
 			res.send(result)
 		}
 	})

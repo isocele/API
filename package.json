@@ -28,7 +28,7 @@
     "nyc": "^13.3.0"
   },
   "scripts": {
-    "test": "nyc --reporter=text mocha"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
