@@ -28,7 +28,7 @@
     "nyc": "^13.3.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "nyc --reporter=text mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
