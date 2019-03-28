@@ -60,7 +60,8 @@ describe('GET /get_message/:username', () => {
 		it('Should return code 500 for someone who does not exists', (done) => {
 			new Promise ((resolve, reject) => {
 				client.get('/get_message/bonjourjesuispersonne', function(err, req, res, data) {
-					res.statusCode.should.equal(504)
+					if (res)
+						res.statusCode.should.equal(504)
 					resolve()
 				})
 			}).then(() => {
