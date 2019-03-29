@@ -3,6 +3,10 @@ node_js: '9'
 
 before_script:
         - npm install
+        - node app.js&
 
 script:
         - npm test
+
+after_script:
+        - killall node
