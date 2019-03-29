@@ -44,7 +44,49 @@ describe('GET /get_message/:username', () => {
 		it('Should return code 500 for someone who does not exists', (done) => {
 			new Promise ((resolve, reject) => {
 				client.get('/get_message/bonjourjesuispersonne', function(err, req, res, data) {
-					res.statusCode.should.equal(504)
+					res.statusCode.should.equal(500)
+					resolve()
+				})
+			}).then(() => {
+				done()
+			}).catch(() => {
+				done()
+			})
+		})
+		it('Should return code 200 for someone that exists', (done) => {
+			new Promise ((resolve, reject) => {
+				client.get('/get_message/maxence', function(err, req, res, data) {
+					res.statusCode.should.equal(200)
+					resolve()
+				})
+			}).then(() => {
+				done()
+			}).catch(() => {
+				done()
+			})
+		})
+
+	})
+})
+
+describe('POST /send_message', () => {
+	describe('Send a message to someone', () => {
+		it ('Should return code 500 for missing field', (done) => {
+			new Promise ((resolve, reject) => {
+				client.post('/send_message', { hello: 'world'}, function(err, req, res, data) {
+					res.statusCode.should.equal(500)
+					resolve()
+				})
+			}).then(() => {
+				done()
+			}).catch(() => {
+				done()
+			})
+		})
+		it ('Should return code 200 for good message', (done) => {
+			new Promise ((resolve, reject) => {
+				client.post('/send_message', { body: {target: 'tester', message: 'This is a test mesage', sender: 'Lord of TESTS'}}, function(err, req, res, data) {
+					res.statusCode.should.equal(500)
 					resolve()
 				})
 			}).then(() => {
