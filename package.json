@@ -22,7 +22,8 @@
     "restify-plugins": "^1.6.0",
     "restify-router": "^0.5.1",
     "serve-static-restify": "^3.0.0",
-    "server-destroy": "^1.0.1"
+    "server-destroy": "^1.0.1",
+    "sha1": "^1.1.1"
   },
   "devDependencies": {
     "nyc": "^13.3.0"
