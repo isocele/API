@@ -105,6 +105,54 @@ router.get('/forgot_password', async (req, res, next) => {
     });
 })
 
+async function changePassword(res, email, newPassword) {
+    var queryString = "update users set password=? where email=?"
+    sql.db.get.query(queryString, [newPassword, email], await function (error, result, fields) {
+        if (error) {
+            res.status(501)
+            res.send('ERROR SQL')
+        } else {
+            res.status(200)
+            res.send('OK')
+        }
+    });
+}
+
+async function resetPassword(res, email, newPassword) {
+    var queryString = "delete from forgot_pass where email=?"
+    sql.db.get.query(queryString, [email], await function (error, result, fields) {
+        if (error) {
+            res.status(501)
+            res.send('ERROR SQL')
+        } else {
+            changePassword(res, email, newPassword)
+        }
+    });
+}
+
+router.get('/reset_password', async (req, res, next) => {
+    if (!req.query.token) {
+        res.status(500)
+        res.send('Missing token')
+    } else if (!req.query.newpass) {
+        res.status(500)
+        res.send('Missing new password')
+    }
+
+    var token = req.query.token
+    var newPassword = req.query.newpass
+
+    var queryString = "select email from forgot_pass where token=?"
+    sql.db.get.query(queryString, [token], await function (error, result, fields) {
+        if (error || result.length === 0) {
+            res.status(501)
+            res.send('This token does not exists')
+        } else {
+            resetPassword(res, result[0].email, newPassword)
+        }
+    });
+})
+
 /**
  *      Export the user Routes
  * @type {{router: *}}
