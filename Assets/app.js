@@ -8,9 +8,9 @@
 const koa = require('koa');
 const app = new koa();
 
-/// Requires Koa-static, allowing to serve static files
-const serve = require('koa-static');
-app.use(serve(__dirname + '/public/'));
+/// Adding CORS security
+const cors = require('@koa/cors');
+app.use(cors());
 
 /// Adding control over requests
 app.use(async (ctx, next) => {
@@ -18,10 +18,6 @@ app.use(async (ctx, next) => {
 	ctx.set('Access-Control-Allow-Credentials', 'true');
 	await next();
 });
-
-/// Adding CORS security
-const cors = require('@koa/cors');
-app.use(cors());
 
 /// Creating the router
 const koarouter = require('koa-router');
@@ -36,7 +32,11 @@ router.get('/', async (ctx) => {
 	return ctx.body = 'You are on Epicare\'s Assets service';
 });
 
-/// Creating the server, setting default port to 8080
+/// Requires Koa-static, allowing to serve static files
+const serve = require('koa-static');
+app.use(serve(__dirname + '/public/'));
+
+/// Creating the server, setting default port to 8084
 const PORT = process.env.PORT || 8084;
 const server = app.listen(PORT, async () => {
 	console.log('Server is now running on ' + PORT);

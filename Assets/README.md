@@ -1,39 +1,60 @@
-# Auth
+# Assets
 
 This application is built using [KoaJS node.js Framework](https://koajs.com/) and is used for the EpiCare project.
 
-The application's default port is 8080, and is accessible on auth.epicare.fr.
+The application's default port is 8084, and is accessible on assets.epicare.fr.
 
 All rights reserved
 
-## Open Endpoints
+## Endpoints
 
-Open endpoints require no Authentication.
+All endpoints require no authentification, as all our assets are public.
 
-* [Register](register.md) : `POST /register`
-* [Login](login.md) : `POST /login/`
-* [Confirm](confirm.md) : `POST /confirm/`
-* [Reset](reset.md) : `GET /reset/`
+**URL** : `/`
 
-## Endpoints that require Authentication
+**Method** : `GET`
 
-Closed endpoints require a valid Token to be included in the header of the
-request. A Token can be acquired from the Login view above.
+**Auth required** : `NO`
 
-### Current User related
+**Data type** : `query`
 
-Each endpoint manipulates or displays information related to the User whose
-Token is provided with the request:
+**Data constraints**
 
-* [Show info](server/get.md) : `GET /user/` *Todo*
-* [Update info](server/put.md) : `PUT /user/` *Todo*
-* [Reset Password](server/reset.md) : `POST /reset/`
+```json
+{
+    "id": "[image's ID in plain text]",
+}
+```
+
+**Data example**
+
+```json
+{
+    "id": "chat.jpg",
+}
+```
+
+**Request example**
+
+```
+	firefox http://localhost:8084/chat.jpg;
+```
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**: Sends the requested image
+
+## Error Response
+
+**Code** : `404 NOT FOUND`
 
 
 ## Run locally
 
   ```
-  npm start || npm run unix
+  npm start
   ```
 
 ## Tests
