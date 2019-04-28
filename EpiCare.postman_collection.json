@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "13cf7059-66aa-440d-bb6f-1c6d07fe925b",
+		"name": "EpiCare",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get /",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080",
+					"host": [
+						"localhost"
+					],
+					"port": "8080"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/register?name=Philippe&last_name=De Sousa&email=animeaomega@gmail.com&password=1234",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Philippe"
+						},
+						{
+							"key": "last_name",
+							"value": "De Sousa"
+						},
+						{
+							"key": "email",
+							"value": "animeaomega@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register fail parameters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/register?name=Philippe&last_name=De Sousa&email=abdac@random.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Philippe"
+						},
+						{
+							"key": "last_name",
+							"value": "De Sousa"
+						},
+						{
+							"key": "email",
+							"value": "abdac@random.com"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register fail user exists",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/register?name=Philippe&last_name=De Sousa&email=philippe.desousaviolante@gmail.com&password=1234",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Philippe"
+						},
+						{
+							"key": "last_name",
+							"value": "De Sousa"
+						},
+						{
+							"key": "email",
+							"value": "philippe.desousaviolante@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login fail user does not exist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/login?name=Philippe&last_name=De Sousa&email=hihi@random.com&password=1234",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Philippe"
+						},
+						{
+							"key": "last_name",
+							"value": "De Sousa"
+						},
+						{
+							"key": "email",
+							"value": "hihi@random.com"
+						},
+						{
+							"key": "password",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/login?email=animeaomega@gmail.com&password=1234",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Philippe",
+							"disabled": true
+						},
+						{
+							"key": "last_name",
+							"value": "De Sousa",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "animeaomega@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/confirm?token=325d16548c99e30f11f4f2154200dd1f120f4589",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"confirm"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "325d16548c99e30f11f4f2154200dd1f120f4589"
+						},
+						{
+							"key": "last_name",
+							"value": "De Sousa",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "hihi@random.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

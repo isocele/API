@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chat example</title>
+  </head>
+  <body>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        var socket = io.connect('http://localhost:8081', { query: 'token=6d3c7a6c1b621bc131407150606f76d253bbcab0', transports: ['websocket'] });
+        socket.emit('start', '5caa16038afe1c1c8ce91adb', function(logs) {
+          console.log(logs);
+        });
+        socket.emit('message', '1234', function(status) {
+          console.log(status);
+        });
+      });
+    </script>
+  </body>
+</html>
