@@ -66,17 +66,16 @@ async function Sockets(http) {
         });
 
         /// On message, displays the message
-        socket.on('message', (message, callback) => {
-            // je ne devrais pas avoir besoin de re find l'user => Beaucoup trop de requêtes pour rien
-            User.findOne({ token: token }, async (err, user) => {
-                currentUser = { name: user.name, email: user.email, id: user._id };
-                await messageArray.push(currentUser.name + ': ' + message);
-                if (await messageArray.length > 15) {
-                    pushChat(conversationId, messageArray);
-                    messageArray = [];
-                }
-                await callback(currentUser.name + ': ' + message);
-            });
+        socket.on('message', async (message, callback) => {
+            // Je ne devrais pas avoir besoin de re find l'user => Beaucoup trop de requêtes pour rien
+            // Je devrais vérifier s'il l'autre membre de la conversation est connecté. Si oui, je lui envoie le message, sinon je le save directement
+            await messageArray.push(currentUser.name + ': ' + message);
+            if (await messageArray.length > 15) {
+                pushChat(conversationId, messageArray);
+                messageArray = [];
+            }
+            await callback(currentUser.name + ': ' + message);
+            // io to les membres de la conversation
         });
 
         /// Pushing the messageArray when the client disconnects
