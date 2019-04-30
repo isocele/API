@@ -67,6 +67,7 @@ async function Sockets(http) {
 
         /// On message, displays the message
         socket.on('message', (message, callback) => {
+            // je ne devrais pas avoir besoin de re find l'user => Beaucoup trop de requêtes pour rien
             User.findOne({ token: token }, async (err, user) => {
                 currentUser = { name: user.name, email: user.email, id: user._id };
                 await messageArray.push(currentUser.name + ': ' + message);
