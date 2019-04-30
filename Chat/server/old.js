@@ -10,9 +10,9 @@ function pushChat(conversationId, messageArray) {
 function loadChat(conversationId, callback) {
     Chat.findOne({ _id: conversationId }, (err, conv) => {
         if (conv.logs)
-            callback(conv.logs);
+            callback({ logs: conv.logs });
         else
-            callback(null);
+            callback({ logs: null });
     });
 }
 
@@ -61,30 +61,27 @@ async function Sockets(http) {
         socket.on('start', (id, callback) => {
             User.findOne({ _id: id }, async (err, user) => {
                 conversationId = await findChat(currentUser, receiver = { name: user.name, email: user.email, id: user._id });
-                loadChat(conversationId, callback);
-                socket.join(conversationId);
+                await loadChat(conversationId, callback);
             });
         });
 
         /// On message, displays the message
-        /// I'm stocking every message one by one for now, this will probably change later on
         socket.on('message', async (message, callback) => {
-            let formattedMessage = currentUser.name + ' ' + currentUser.email + ': ' + message
-            messageArray.push(formattedMessage);
-            /// Should keep this to 15, and to remove this condition if the user is alone in the room
-            //if (messageArray.length > 15) {
-            pushChat(conversationId, messageArray);
-            messageArray = [];
-            //}
-            io.to(conversationId).emit('message', formattedMessage);
-            callback(true);
+            // Je ne devrais pas avoir besoin de re find l'user => Beaucoup trop de requêtes pour rien
+            // Je devrais vérifier s'il l'autre membre de la conversation est connecté. Si oui, je lui envoie le message, sinon je le save directement
+            await messageArray.push(currentUser.name + ': ' + message);
+            if (await messageArray.length > 15) {
+                pushChat(conversationId, messageArray);
+                messageArray = [];
+            }
+            await callback(currentUser.name + ': ' + message);
+            // io to les membres de la conversation
         });
 
         /// Pushing the messageArray when the client disconnects
         socket.on('disconnect', () => {
             if (currentUser && receiver && conversationId) {
-                //pushChat(conversationId, messageArray);
-                io.to(conversationId).emit('message', currentUser.name + ' has disconnected');
+                pushChat(conversationId, messageArray);
             }
         });
     });
