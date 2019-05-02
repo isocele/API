@@ -29,6 +29,7 @@ async function Upload(router) {
             return ctx.body = "Error missing file prescription."
         }
 
+        // Register the file uploaded
         ctx.status = registerFile(file.path, username);
         if (ctx.status !== 500) {
             return ctx.body = "Error while getting your prescription, please try again later"
