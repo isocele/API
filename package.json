@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/epicare2021/API#readme",
   "dependencies": {
-    "assets": "file:Assets"
+    "assets": "file:Assets",
+    "bcrypt": "^3.0.6",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0"
   },
   "devDependencies": {
     "jest": "^24.7.1",

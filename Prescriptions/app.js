@@ -1,31 +1,21 @@
-const restify = require('restify')
+/**
+ * Koa
+ * @type {module.Application|*}
+ */
+const Koa = require("koa");
+const koaRouter = require("koa-router");
+const koaBody = require("koa-body");
+const router = new koaRouter();
 
-const upload = require('./routes/upload')
-const image = require('./routes/image')
+/**
+ * Creating koa app
+ * @type {module.Application}
+ */
+const app = new Koa();
 
-var Router = require('restify-router').Router
-var routerInstance = new Router()
+app.use(koaBody({ multipart: true }));
+app.use(router.routes());
+app.use(router.allowedMethods());
+app.listen(8080);
 
-const server = restify.createServer({
-	name: 'Epicare',
-	version: '0.0.1',
-	accept: ['image/png', 'image/jpg']
-});
-
-server.use(restify.plugins.acceptParser(server.acceptable));
-server.use(restify.plugins.queryParser());
-server.use(restify.plugins.bodyParser());
-
-function respond(req, res, next) {
-	res.send(req.params)
-	next()
-}
-
-upload.router.applyRoutes(server)
-image.router.applyRoutes(server)
-
-server.listen(8082, function () {
-	console.log('%s listening at %s', server.name, server.url)
-})
-
-module.exports = server
+require('./server/upload')(router);
