@@ -20,6 +20,7 @@ async function Upload(router) {
         const file = ctx.request.files.img;
         const username = ctx.request.headers.username;
 
+        // Check for params
         if (!username) {
             ctx.status = 502;
             return ctx.body = "Error missing username.";
