@@ -5,15 +5,18 @@
 let environments = {
 	prod: {
 		mongo: 'mongodb://epicare.fr:27017/epicare',
-		logger: false
+		logger: false,
+		socketOrigins: '*:*' /// I should set something like [chat.epicare.fr]
 	},
 	dev: {
 		mongo: 'mongodb://epicare.fr:27017/epicare_test',
-		logger: true
+		logger: true,
+		socketOrigins: '*:*'
 	},
 	test: {
 		mongo: 'mongodb://epicare.fr:27017/epicare_test',
-		logger: false
+		logger: false,
+		socketOrigins: '*:*'
 	}
 }
 

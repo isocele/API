@@ -6,14 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=dev&& nodemon main",
-    "unix": "NODE_ENV=dev nodemon main"
+		"unix": "NODE_ENV=dev nodemon main",
+		"prod": "NODE_ENV=prod PORT=8081 nodemon main"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
-    "@koa/cors": "^3.0.0",
     "mongoose": "^5.5.2",
     "socket.io": "^2.2.0"
   }
