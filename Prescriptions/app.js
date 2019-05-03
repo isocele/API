@@ -19,3 +19,4 @@ app.use(router.allowedMethods());
 app.listen(8080);
 
 require('./server/upload')(router);
+require('./server/download')(router);

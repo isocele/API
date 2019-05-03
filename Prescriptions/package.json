@@ -1,0 +1,27 @@
+{
+  "name": "prescriptions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github.com/epicare2021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/github.com/epicare2021/issues"
+  },
+  "homepage": "https://github.com/github.com/epicare2021#readme",
+  "dependencies": {
+    "glob": "^7.1.3",
+    "jszip": "^3.2.1",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa-send": "^5.0.0"
+  }
+}
