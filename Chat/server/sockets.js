@@ -1,4 +1,5 @@
 const { User, Chat } = require('./schemas');
+const env = require('./env');
 
 /// Pushes the newly sent messages to the database
 function pushChat(conversationId, messageArray) {
@@ -39,7 +40,7 @@ async function Sockets(http) {
 	const io = require('socket.io')(http);
 
 	/// Allowing everyone to connect (should change)
-	io.origins('*:*');
+	io.origins(env.socketOrigins);
 
 	/// Catches connection, returns the socket on connection
 	io.on('connection', (socket) => {
