@@ -45,9 +45,9 @@ async function Sockets(http) {
 	io.on('connection', (socket) => {
 		const token = socket.request._query['token'];
 		let messageArray = [];
-		let currentUser = {};
-		let receiver = {};
-		let conversationId = '';
+			currentUser = {};
+			receiver = {};
+			conversationId = '';
 
 		/// Checks whether or not the user exists. If he doesn't, disconnect the socket
 		User.findOne({ token: token }, (err, user) => {
@@ -63,13 +63,14 @@ async function Sockets(http) {
 				conversationId = await findChat(currentUser, receiver = { name: user.name, email: user.email, id: user._id });
 				loadChat(conversationId, callback);
 				socket.join(conversationId);
+				io.to(conversationId).emit('message', currentUser.name + ': connected');
 			});
 		});
 
 		/// On message, displays the message
 		/// Stocking every messages if the user is alone, else stocks every 15 messages to not overcharge the requests
 		socket.on('message', (message, callback) => {
-			let formattedMessage = currentUser.name + ' ' + currentUser.email + ': ' + message
+			let formattedMessage = currentUser.name + ': ' + message
 			messageArray.push(formattedMessage);
 			if (io.sockets.adapter.rooms[conversationId].length < 2) {
 				pushChat(conversationId, messageArray);
@@ -84,10 +85,10 @@ async function Sockets(http) {
 
 		/// Pushing the messageArray when the client disconnects
 		socket.on('disconnect', () => {
-			if (currentUser && receiver && conversationId) {
+			if (currentUser && receiver && conversationId)
 				pushChat(conversationId, messageArray);
-			} else if () {
-				
+			if (currentUser && conversationId) {
+				io.to(conversationId).emit('message', currentUser.name + ': disconnected');
 			}
 		});
 	});
