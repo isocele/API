@@ -2,7 +2,7 @@ language: node_js
 node_js: '9'
 
 before_script:
-        - npm install && cd Assets && npm install && cd ../Users && npm install
+        - cd Globals && npm install && cd ../Assets && npm install && cd ../Users && npm install
 
 env:
         - NODE_ENV=test

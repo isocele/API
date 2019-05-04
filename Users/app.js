@@ -1,6 +1,7 @@
 /// Getting the env and every databases
-const env = require('./server/env');
-const User = require('./server/userSchema');
+const Globals = require('../Globals');
+const env = Globals.env;
+const User = Globals.schemas.User;
 
 /// Creating the App, using Koa
 const koa = require('koa');
@@ -46,6 +47,7 @@ const server = app.listen(PORT, async () => {
 
 /// Requiring every other file, and sending the required databases
 require('./server/auth')(router, User);
+//require('./server/users')(router, User);
 
 /// Exporting the server for the tests
 module.exports = server;

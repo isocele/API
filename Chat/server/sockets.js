@@ -1,5 +1,7 @@
-const { User, Chat } = require('./schemas');
-const env = require('./env');
+'use strict';
+const Globals = require('../../Globals');
+const env = Globals.env;
+const { User, Chat } = Globals.schemas;
 
 /// Pushes the newly sent messages to the database
 function pushChat(conversationId, messageArray) {
