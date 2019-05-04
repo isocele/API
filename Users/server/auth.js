@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const crypter = require('crypto');
 const nodemailer = require('nodemailer');
-const env = require('./env');
+const env = require('../../Globals/env');
 
 /// Sets the context's body and status
 async function setCtx(ctx, status, body) {

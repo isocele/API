@@ -16,12 +16,5 @@
   "bugs": {
     "url": "https://github.com/epicare2021/API/issues"
   },
-  "homepage": "https://github.com/epicare2021/API#readme",
-  "dependencies": {
-    "assets": "file:Assets"
-  },
-  "devDependencies": {
-    "jest": "^24.7.1",
-    "supertest": "^4.0.2"
-  }
+  "homepage": "https://github.com/epicare2021/API#readme"
 }

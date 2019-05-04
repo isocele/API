@@ -1,11 +1,10 @@
+/// Connection to mongoose, depending on the environment
 const env = require('./env');
 
-/// Connection to mongoose, depending on the environment
 const mongoose = require('mongoose');
 mongoose.connect(env.mongo, {
 	useNewUrlParser: true
 });
-mongoose.set('useFindAndModify', false);
 
 /// Default user model, stocked on mongoose
 const userSchema = mongoose.Schema({
@@ -14,10 +13,11 @@ const userSchema = mongoose.Schema({
 	email: String,
 	password: String,
 	active: Boolean,
-	token: String
+    token: String,
+    refreshToken: String,
+    type: String
 });
 
-/// Chat history model, containing the user's id and his logs
 const chatSchema = mongoose.Schema({
 	firstUser: Object,
 	secondUser: Object,
@@ -27,4 +27,7 @@ const chatSchema = mongoose.Schema({
 let User = mongoose.model('User', userSchema);
 let Chat = mongoose.model('Chat', chatSchema);
 
-module.exports = {User, Chat};
+module.exports = {
+    User,
+    Chat
+};

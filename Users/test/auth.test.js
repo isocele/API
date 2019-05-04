@@ -1,26 +1,25 @@
 const server = require('../app');
 const request = require('supertest');
-const mongoose = require('mongoose');
 
 afterEach(async () => {
     await server.close();
 });
 
 afterAll(async () => {
-    await mongoose.disconnect();
     await server.close();
 });
 
 describe('Signup without query', () => {
-    test('should respond as expected', async () => {
+    test('should respond as expected', async (done) => {
         const response = await request(server)
         .post('/register');
         expect(response.status).toEqual(400);
+        done();
     });
 });
 
 describe('Succesfull signup', () => {
-    test('should respond as expected', async () => {
+    test('should respond as expected', async (done) => {
         const response = await request(server)
         .post('/register')
         .send({
@@ -31,11 +30,12 @@ describe('Succesfull signup', () => {
         })
         .set('Content-Type', 'application/json');
         expect(response.status).toEqual(200);
+        done();
     })
 });
 
 describe('Succesfull login', () => {
-    test('should respond as expected', async () => {
+    test('should respond as expected', async (done) => {
         const response = await request(server)
         .post('/login')
         .send({
@@ -44,11 +44,12 @@ describe('Succesfull login', () => {
         })
         .set('Content-Type', 'application/json');
         expect(response.status).toEqual(200);
+        done();
     })
 });
 
 describe('Succesfull delete', () => {
-    test('should respond as expected', async () => {
+    test('should respond as expected', async (done) => {
         const response = await request(server)
         .post('/delete')
         .send({
@@ -56,13 +57,15 @@ describe('Succesfull delete', () => {
         })
         .set('Content-Type', 'application/json');
         expect(response.status).toEqual(200);
+        done();
     })
 });
 
 describe('Login without query', () => {
-    test('should respond as expected', async () => {
+    test('should respond as expected', async (done) => {
         const response = await request(server)
         .post('/login');
         expect(response.status).toEqual(400);
+        done();
     });
 });

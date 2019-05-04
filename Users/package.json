@@ -4,8 +4,8 @@
   "description": "Epicare's API",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --runInBand",
-    "testWindows": "set NODE_ENV=test&& jest --runInBand",
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
+    "testWindows": "set NODE_ENV=test&& jest --runInBand --detectOpenHandles --forceExit",
     "start": "set NODE_ENV=dev&& nodemon main",
     "unix": "NODE_ENV=dev nodemon main"
   },
@@ -27,7 +27,6 @@
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
-    "mongoose": "^5.4.22",
     "nodemailer": "^6.1.0"
   },
   "devDependencies": {
