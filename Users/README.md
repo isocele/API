@@ -26,9 +26,12 @@ request. A Token can be acquired from the Login view above.
 Each endpoint manipulates or displays information related to the User whose
 Token is provided with the request:
 
-* [Show info](server/Users.md#profile) : `GET /profile/` *Todo*
-* [Update info](server/Users.md#profile) : `PUT /profile/` *Todo*
+* [Show info](server/Users.md#profile) : `GET /profile/`
+* [Update info](server/Users.md#profile) : `PUT /profile/`
 
+### Research related
+
+* [Get User Info](server/Users.md#user) : `GET /user/:id` *TODO*
 
 ## Run locally
 
