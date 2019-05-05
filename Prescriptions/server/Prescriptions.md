@@ -1,6 +1,6 @@
 # Auth
 ## Upload
-Allows the user to create an account.
+Allows the user to upload a prescriptions picture.
 
 **URL** : `/upload?token=TOKEN`
 
@@ -38,7 +38,8 @@ Allows the user to create an account.
 ```
 
 ## Download
-Allows the user to log in to their previously created account.
+
+Allows the user to get all the files related to his profile.
 
 **URL** : `/download?token=TOKEN`
 
@@ -87,7 +88,8 @@ Allows the user to log in to their previously created account.
 ```
 
 ## DownloadFile
-Confirm the user's account by verifying the email address.
+
+Allows the user to download a prescription.
 
 **URL** : `/download/fileName?token=TOKEN`
 
