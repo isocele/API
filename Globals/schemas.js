@@ -3,7 +3,8 @@ const env = require('./env');
 
 const mongoose = require('mongoose');
 mongoose.connect(env.mongo, {
-	useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
 });
 
 /// Default user model, stocked on mongoose
@@ -15,7 +16,8 @@ const userSchema = mongoose.Schema({
 	active: Boolean,
     token: String,
     refreshToken: String,
-    type: String
+    type: String,
+    contacts: Object
 });
 
 const chatSchema = mongoose.Schema({

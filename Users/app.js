@@ -47,7 +47,7 @@ const server = app.listen(PORT, async () => {
 
 /// Requiring every other file, and sending the required databases
 require('./server/auth')(router, User);
-//require('./server/users')(router, User);
+require('./server/users')(router, User);
 
 /// Exporting the server for the tests
 module.exports = server;

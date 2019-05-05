@@ -73,7 +73,7 @@ async function Users(router, User) {
 		if (!q.email || !q.password)
 			return await setCtx(ctx, 400, 'Error: Missing parameters');
 		let email = q.email;
-		password = q.password;
+		    password = q.password;
 		const user = await User.findOne({ email: email });
 		if (!user)
 			return await setCtx(ctx, 400, 'Error: Unknown user');
