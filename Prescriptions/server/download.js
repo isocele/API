@@ -17,14 +17,40 @@ const fs = require("fs");
  */
 const send = require('koa-send');
 
+const Globals = require('../../Globals');
+const User = Globals.schemas.User;
+
+
+/**
+ * TEST TOKEN: 24ff7e0d839a877695857e9739437f68e9868731
+ * @param router
+ * @returns {Promise<void>}
+ * @constructor
+ */
 async function Download(router) {
 
-    router.get("/download/:username", async ctx => {
-        if (!ctx.params.username) {
-            ctx.status = 502;
-            return ctx.body = "Error missing Username"
+    router.get("/download", async ctx => {
+        if (!ctx.query.token) {
+            ctx.status = 400;
+            return ctx.body = "Error: Missing parameters."
         }
-        const hashedUsername = crypto.createHash('sha1').update(ctx.params.username).digest('hex');
+
+        let currentUser = undefined;
+        const token = ctx.query.token;
+        /// Checks whether or not the user exists. If he doesn't, disconnect
+        await User.findOne({ token: token }, (err, user) => {
+            if (err || !user)
+                ctx.status = 502;
+            else
+                currentUser = { name: user.name, email: user.email, id: user._id };
+        });
+
+        console.log(currentUser);
+
+        if (!currentUser)
+            return ctx.body = "Error: Unknown user.";
+
+        const hashedUsername = crypto.createHash('sha1').update(currentUser.name).digest('hex');
         const folderName = "./Prescriptions_files/" + hashedUsername;
 
         let prescriptions = {"Files": []};
@@ -39,23 +65,35 @@ async function Download(router) {
                 }
             });
         } catch (err) {
-            ctx.status = 502;
+            ctx.status = 200;
             if (err.code === "ENOENT")
-                return ctx.body = "User not found, or user has no active prescriptions";
+                return ctx.body = "User has no active prescriptions";
             return ctx.body = err
         }
         ctx.status = 200;
-        console.log(prescriptions);
         return ctx.body = prescriptions
     });
 
-    router.get("/download/:username/:filename", async ctx => {
-        if (!ctx.params.username || !ctx.params.filename) {
+    router.get("/download/:filename", async ctx => {
+        if (!ctx.params.filename) {
             ctx.status = 502;
-            return ctx.body = "Error missing Username or filename"
+            return ctx.body = "Error missing filename or token"
         }
 
-        const hashedUsername = crypto.createHash('sha1').update(ctx.params.username).digest('hex');
+        let currentUser = undefined;
+        const token = ctx.query.token;
+        /// Checks whether or not the user exists. If he doesn't, disconnect
+        await User.findOne({ token: token }, (err, user) => {
+            if (err || !user)
+                ctx.status = 502;
+            else
+                currentUser = { name: user.name, email: user.email, id: user._id };
+        });
+
+        if (!currentUser)
+            return ctx.body = "Invalid token";
+
+        const hashedUsername = crypto.createHash('sha1').update(currentUser.name).digest('hex');
         const folderName = "./Prescriptions_files/" + hashedUsername;
         const filePath = folderName + "/" + ctx.params.filename;
 
