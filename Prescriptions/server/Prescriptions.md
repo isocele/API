@@ -89,7 +89,7 @@ Allows the user to log in to their previously created account.
 ## DownloadFile
 Confirm the user's account by verifying the email address.
 
-**URL** : `/download/fileName?token:TOKEN`
+**URL** : `/download/fileName?token=TOKEN`
 
 **Method** : `GET`
 
