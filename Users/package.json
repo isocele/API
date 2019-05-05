@@ -7,7 +7,8 @@
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
     "testWindows": "set NODE_ENV=test&& jest --runInBand --detectOpenHandles --forceExit",
     "start": "set NODE_ENV=dev&& nodemon main",
-    "unix": "NODE_ENV=dev nodemon main"
+    "unix": "NODE_ENV=dev nodemon main",
+    "prod": "NODE_ENV=prod nodemon main"
   },
   "repository": {
     "type": "git",

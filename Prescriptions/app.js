@@ -16,7 +16,9 @@ const app = new Koa();
 app.use(koaBody({ multipart: true }));
 app.use(router.routes());
 app.use(router.allowedMethods());
-app.listen(8080);
+
+const PORT = process.env.PORT || 8082;
+app.listen(PORT);
 
 /// Creating default route
 router.get('/', async (ctx) => {

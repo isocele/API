@@ -36,8 +36,8 @@ router.get('/', async (ctx) => {
 const serve = require('koa-static');
 app.use(serve(__dirname + '/public/'));
 
-/// Creating the server, setting default port to 8084
-const PORT = process.env.PORT || 8084;
+/// Creating the server, setting default port to 8083
+const PORT = process.env.PORT || 8083;
 const server = app.listen(PORT, async () => {
 	console.log('Server is now running on ' + PORT);
 });

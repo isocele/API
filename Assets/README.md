@@ -2,7 +2,7 @@
 
 This application is built using [KoaJS node.js Framework](https://koajs.com/) and is used for the EpiCare project.
 
-The application's default port is 8084, and is accessible on assets.epicare.fr.
+The application's default port is 8083, and is accessible on assets.epicare.fr.
 
 All rights reserved
 

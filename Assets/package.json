@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest --runInBand",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prod": "NODE_ENV=prod nodemon app.js"
   },
   "author": "",
   "license": "ISC",
