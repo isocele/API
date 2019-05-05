@@ -13,7 +13,7 @@ Closed endpoints require Authentication.
 
 * [Upload](server/Prescriptions.md#Upload) : `POST /upload?token=TOKEN`
 * [Download](server/Prescriptions.md#Download) : `POST /download?token=TOKEN`
-* [Download File](server/Prescriptions.md#DownloadFile) : `GET /download/FILENAME?token=TOKEN`
+* [Download File](server/Prescriptions.md#DownloadFile) : `GET /download/fileName?token=TOKEN`
 
 ## Endpoints that require Authentication
 
