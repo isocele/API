@@ -3,7 +3,7 @@ services:
   assets:
     image: node:latest
     build: .
-    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Assets:/usr/app
       - ./Assets/node_modules:/usr/app/node_modules
@@ -12,7 +12,7 @@ services:
   users:
     image: node:latest
     build: .
-    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Users:/usr/app
       - ./Users/node_modules:/usr/app/node_modules
@@ -21,7 +21,7 @@ services:
   prescription:
     image: node:latest
     build: .
-    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Prescriptions:/usr/app
       - ./Prescriptions/node_modules:/usr/app/node_modules
@@ -30,7 +30,7 @@ services:
   chat:
     image: node:latest
     build: .
-    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Chat:/usr/app
       - ./Chat/node_modules:/usr/app/node_modules
