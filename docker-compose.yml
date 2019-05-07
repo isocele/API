@@ -1,0 +1,38 @@
+version: '2'
+services:
+  assets:
+    image: node:latest
+    build: .
+    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    volumes:
+      - ./Assets:/usr/app
+      - ./Assets/node_modules:/usr/app/node_modules
+    ports:
+      - "8083:8083"
+  users:
+    image: node:latest
+    build: .
+    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    volumes:
+      - ./Users:/usr/app
+      - ./Users/node_modules:/usr/app/node_modules
+    ports:
+      - "8080:8080"
+  prescription:
+    image: node:latest
+    build: .
+    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    volumes:
+      - ./Prescriptions:/usr/app
+      - ./Prescriptions/node_modules:/usr/app/node_modules
+    ports:
+      - "8082:8082"
+  chat:
+    image: node:latest
+    build: .
+    command: sh -c 'cd /usr/app; npm install nodemon; npm run prod'
+    volumes:
+      - ./Chat:/usr/app
+      - ./Chat/node_modules:/usr/app/node_modules
+    ports:
+      - "8081:8081"
