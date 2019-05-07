@@ -24,6 +24,6 @@ let environments = {
 }
 
 let mode = process.env.NODE_ENV;
-    env = environments[mode];
+let env = environments[mode];
 
 module.exports = env;
