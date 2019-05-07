@@ -25,9 +25,9 @@ services:
     build: .
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
-      - ./Prescriptions:/usr/app
-      - ./Globals:/usr
-      - ./Prescriptions/node_modules:/usr/app/node_modules
+      - ./Prescriptions:/usr/app/dir
+      - ./Globals:/usr/app
+      - ./Prescriptions/node_modules:/usr/app/dir/node_modules
     ports:
       - "8082:8082"
   chat:
