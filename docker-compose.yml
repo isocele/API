@@ -5,9 +5,9 @@ services:
     build: .
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
-      - ./Assets:/usr/app
-      - ./Globals:/usr
-      - ./Assets/node_modules:/usr/app/node_modules
+      - ./Assets:/usr/app/dir
+      - ./Globals:/usr/app
+      - ./Assets/node_modules:/usr/app/dir/node_modules
     ports:
       - "8083:8083"
   users:
@@ -15,9 +15,9 @@ services:
     build: .
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
-      - ./Users:/usr/app
-      - ./Globals:/usr
-      - ./Users/node_modules:/usr/app/node_modules
+      - ./Users:/usr/app/dir
+      - ./Globals:/usr/app
+      - ./Users/node_modules:/usr/app/dir/node_modules
     ports:
       - "8080:8080"
   prescription:
@@ -35,8 +35,8 @@ services:
     build: .
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
-      - ./Chat:/usr/app
-      - ./Globals:/usr
-      - ./Chat/node_modules:/usr/app/node_modules
+      - ./Chat:/usr/app/dir
+      - ./Globals:/usr/app
+      - ./Chat/node_modules:/usr/app/dir/node_modules
     ports:
       - "8081:8081"
