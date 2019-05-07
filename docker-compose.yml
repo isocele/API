@@ -6,6 +6,7 @@ services:
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Assets:/usr/app
+      - ./Globals:/usr
       - ./Assets/node_modules:/usr/app/node_modules
     ports:
       - "8083:8083"
@@ -15,6 +16,7 @@ services:
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Users:/usr/app
+      - ./Globals:/usr
       - ./Users/node_modules:/usr/app/node_modules
     ports:
       - "8080:8080"
@@ -24,6 +26,7 @@ services:
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Prescriptions:/usr/app
+      - ./Globals:/usr
       - ./Prescriptions/node_modules:/usr/app/node_modules
     ports:
       - "8082:8082"
@@ -33,6 +36,7 @@ services:
     command: sh -c 'cd /usr/app; npm install nodemon; npm install; npm run prod'
     volumes:
       - ./Chat:/usr/app
+      - ./Globals:/usr
       - ./Chat/node_modules:/usr/app/node_modules
     ports:
       - "8081:8081"
