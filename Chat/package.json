@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=dev&& nodemon main",
     "unix": "NODE_ENV=dev nodemon main",
-    "prod": "NODE_ENV=prod PORT=8081 nodemon main"
+    "prod": "NODE_ENV=prod nodemon main"
   },
   "author": "",
   "license": "ISC",

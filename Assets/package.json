@@ -5,16 +5,18 @@
   "main": "app.js",
   "scripts": {
     "test": "jest --runInBand",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prod": "NODE_ENV=prod nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^3.0.0",
+    "jest": "^24.7.1",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
-    "@koa/cors": "^3.0.0",
-    "jest": "^24.7.1",
+    "nodemon": "^1.19.0",
     "supertest": "^4.0.2"
   }
 }

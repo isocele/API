@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "NODE_ENV=dev nodemon main",
+    "prod": "NODE_ENV=prod nodemon main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,11 +19,13 @@
   },
   "homepage": "https://github.com/github.com/epicare2021#readme",
   "dependencies": {
+    "aes-js": "^3.1.2",
     "glob": "^7.1.3",
     "jszip": "^3.2.1",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
-    "koa-send": "^5.0.0"
+    "koa-send": "^5.0.0",
+    "nodemon": "^1.19.0"
   }
 }
