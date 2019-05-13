@@ -30,7 +30,7 @@ async function sendEmail(content) {
 			from: 'epicare.epitech@gmail.com',
 			to: content.email,
 			subject: '[EpiCare] ' + content.subject,
-			text: content.content
+			html: content.html
 		};
 		await transporter.sendMail(mailOptions);
 	}
@@ -62,7 +62,11 @@ async function Users(router, User) {
 		await sendEmail({
 			email: q.email,
 			subject: 'Please confirm your account',
-			content: 'localhost:8080/confirm?token=' + token
+			html: '<h1>Welcome to EpiCare!</h1> \
+			<p>Click on this link to confirm your account!</p> \
+			<form action="http://localhost:8080/confirm?token=' + token + '" method="post">			\
+				<button type="submit" name="token" value="Click me!" class= "btn-link">Click me to confirm!</button>	\
+			</form>'
 		});
 		return await setCtx(ctx, 200, 'OK');
 	});
@@ -107,7 +111,7 @@ async function Users(router, User) {
 		await sendEmail({
 			email: q.email,
 			subject: 'Reset your password',
-			content: 'localhost:8080/reset?token=' + user.token
+			html: 'localhost:8080/reset?token=' + user.token
 		});
 		return await setCtx(ctx, 200, 'Email sent');
 	});
@@ -137,6 +141,19 @@ async function Users(router, User) {
 		return await setCtx(ctx, 200, 'User removed!');
 	});
 
+	/* router.get('/test', async (ctx) => {
+		await sendEmail({
+			email: 'philippe.desousaviolante@gmail.com',
+			subject: 'Please confirm your account',
+			html: '<h1>Welcome to EpiCare!</h1> \
+			<p>Click on this link to confirm your account!</p> \
+			<form action="http://localhost:8080/confirm?token=' + '1234' + '" method="post">			\
+				<button type="submit" name="token" value="Click me!" class= "btn-link">Click me to confirm!</button>	\
+			</form>'
+		});
+		return await setCtx(ctx, 200, 'Email sent!');
+	});
+ */
 	return Users;
 };
 
