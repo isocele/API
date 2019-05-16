@@ -22,7 +22,7 @@ app.listen(PORT);
 
 /// Creating default route
 router.post('/', async (ctx) => {
-    console.log(ctx);
+    console.log(ctx.payload);
     ctx.status = 200;
     return ctx.body = 'You are on Epicare\'s prescriptions service';
 });
