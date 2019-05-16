@@ -25,9 +25,17 @@ app.listen(PORT);
 
 /// Creating default route
 router.post('/', async (ctx) => {
-    console.log(ctx.request.body.release.zipball_url);
     ctx.status = 200;
-    return ctx.body = 'You are on Epicare\'s prescriptions service';
+    let exec = require('child_process').exec;
+
+    exec('./reload.sh',
+        function (error, stdout, stderr) {
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+            if (error !== null) {
+                console.log('exec error: ' + error);
+            }
+        });
 });
 
 router.get('/', async (ctx) => {
