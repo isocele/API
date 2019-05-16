@@ -26,3 +26,8 @@ router.post('/', async (ctx) => {
     ctx.status = 200;
     return ctx.body = 'You are on Epicare\'s prescriptions service';
 });
+
+router.get('/', async (ctx) => {
+    ctx.status = 200;
+    return ctx.body = 'You are on Epicare\'s prescriptions service';
+});
