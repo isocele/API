@@ -40,5 +40,5 @@ router.post('/', async (ctx) => {
 
 router.get('/', async (ctx) => {
     ctx.status = 200;
-    return ctx.body = 'You are on Epicare\'s prescriptions service';
+    return ctx.body = 'You are on Epicare\'s webhook service';
 });
