@@ -19,12 +19,12 @@ async function Upload(router) {
      * Route to upload prescriptions
      */
 	router.post("/upload", async ctx => {
-		const file = ctx.request.files.img;
-
-		if (!file) {
+		if (!ctx.request.files) {
 			ctx.status = 400;
 			return ctx.body = "No file specified";
 		}
+		const file = ctx.request.files.img;
+
 		let currentUser = undefined;
 		const token = ctx.query.token;
 		/// Checks whether or not the user exists. If he doesn't, disconnect
