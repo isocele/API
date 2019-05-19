@@ -20,7 +20,6 @@ async function createToken() {
 async function sendEmail(content) {
 	if (env.mail) {
 		const transporter = await nodemailer.createTransport({
-			service: 'gmail',
 			auth: {
 				user: 'epicare.epitech@gmail.com',
 				pass: 'epicare2018'
@@ -135,7 +134,7 @@ async function Users(router, User) {
 			return await setCtx(ctx, 200, token);
 		});
 	});
-	
+
 	return Users;
 };
 
