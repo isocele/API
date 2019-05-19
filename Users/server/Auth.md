@@ -223,10 +223,9 @@ Sends an email to the user in order to reset his password.
 ```
 
 ## Reset
+Modifies the user's existing password given an ID (given by the email)
 
-Modifies the user's existing password.
-
-**URL** : `/reset`
+**URL** : `/reset + id`
 
 **Method** : `POST`
 
@@ -238,9 +237,13 @@ Modifies the user's existing password.
 
 ```json
 {
-	"token": "[token given by the email's link]",
-	"email": "[valid email address]",
-	"password": "[NEW password in plain text]"
+    "query": {
+        "id": "[user's id]",
+    },
+    "body": {
+        "email": "[valid email address]",
+        "password": "[NEW password in plain text]"
+    }
 }
 ```
 
@@ -248,9 +251,13 @@ Modifies the user's existing password.
 
 ```json
 {
-	"token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d",
-	"email": "jest@gmail.com",
-	"password": "jesttest1"
+    "query": {
+        "id": "112233445566",
+    },
+    "body": {
+        "email": "jest@gmail.com",
+        "password": "jesttest1"
+    }
 }
 ```
 
