@@ -82,9 +82,9 @@ async function Users(router, User) {
 		if (!user)
 			return await setCtx(ctx, 400, 'Error: Unknown user');
 		if (!user.active && process.env.NODE_ENV != 'test' && process.env.NODE_ENV != 'dev')
-			return await setCtx(ctx, 400, "Error: Confirm your email");
+			return await setCtx(ctx, 400, 'Error: Confirm your email');
 		if (!await bcrypt.compareSync(password, user.password))
-			return await setCtx(ctx, 200, 'Error: Unknown user');
+			return await setCtx(ctx, 400, 'Error: Unknown user');
 		return await setCtx(ctx, 200, {token: user.token});
 	});
 
@@ -92,10 +92,10 @@ async function Users(router, User) {
 	router.post('/confirm', async (ctx) => {
 		let q = ctx.query;
 		if (!q.token)
-			return await setCtx(ctx, 400, "Error: Missing parameters");
+			return await setCtx(ctx, 400, 'Error: Missing parameters');
 		let user = await User.findOne({ token: q.token });
 		if (!user || user.token != q.token)
-			return await setCtx(ctx, 400, "Error: Wrong token");
+			return await setCtx(ctx, 400, 'Error: Wrong token');
 		user.active = true;
 		await user.save();
 		return await setCtx(ctx, 200, 'OK');
@@ -105,7 +105,7 @@ async function Users(router, User) {
 	router.get('/reset', async (ctx) => {
 		let q = ctx.request.body;
 		if (!q.email)
-			return await setCtx(ctx, 400, "Error: Missing parameters");
+			return await setCtx(ctx, 400, 'Error: Missing parameters');
 		let user = await User.findOne({ email: q.email });
 		if (!user) return await setCtx(ctx, 400, 'Error: User not found');
 		await sendEmail({
@@ -126,11 +126,11 @@ async function Users(router, User) {
 		let q = ctx.request.body;
 		let query = ctx.query;
 		if (!query.id || !q.email || !q.password)
-			return await setCtx(ctx, 400, "Error: Missing parameters");
+			return await setCtx(ctx, 400, 'Error: Missing parameters');
 		let token = await createToken();
 		let password = await bcrypt.hashSync(q.password, 10);
 		await User.findOneAndUpdate({ _id: query.id, email: q.email }, { password: password, token: token }, async (err, user) => {
-			if (err || !user) return await setCtx(ctx, 400, "Error: User not found");
+			if (err || !user) return await setCtx(ctx, 400, 'Error: User not found');
 			return await setCtx(ctx, 200, token);
 		});
 	});
