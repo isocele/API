@@ -37,6 +37,23 @@ describe('Succesfull signup', () => {
     })
 });
 
+describe('Account already exists', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .post('/register')
+        .send({
+            name: 'Jest',
+            last_name: 'Test',
+            email: 'jest@gmail.com',
+            password: 'jesttest'
+        })
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(400);
+        expect(response.text).toEqual('Error: Email already used');
+        done();
+    })
+});
+
 describe('Succesfull login', () => {
     test('should respond as expected', async (done) => {
         const response = await request(server)

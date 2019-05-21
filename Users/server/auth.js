@@ -24,6 +24,7 @@ async function sendEmail(content) {
 				user: 'epicare.epitech@gmail.com',
 				pass: 'epicare2018'
 			},
+			service: 'gmail'
 		});
 		var mailOptions = {
 			from: 'epicare.epitech@gmail.com',
@@ -47,7 +48,7 @@ async function Users(router, User) {
 			return await setCtx(ctx, 400, 'Error: Missing parameters');
 		const user = await User.findOne({ email: q.email });
 		if (user)
-			return await setCtx(ctx, 400, 'Error: Email aready used');
+			return await setCtx(ctx, 400, 'Error: Email already used');
 		let token = await createToken();
 		let newUser = await new User({
 			name: q.name,
