@@ -69,11 +69,13 @@
 	<script>
 		$(function () {
 			var socket = io.connect('http://localhost:8081', { query: 'token=6d3c7a6c1b621bc131407150606f76d253bbcab0', transports: ['websocket'] });
-			socket.emit('start', '5caa16038afe1c1c8ce91adb', function (logs) {
+			socket.emit('start', '5caa16038afe1c1c8ce91adb', function (err, logs) {
 				if (logs)
 					logs.forEach(message => {
 						$('#messages').append($('<li>').text(message));
 					});
+				else if (err)
+					console.log(err);
 			});
 			$('form').submit(function () {
 				socket.emit('message', $('#m').val(), (message) => {

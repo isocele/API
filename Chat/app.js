@@ -25,9 +25,12 @@ router.get('/', async (ctx) => {
 const http = require('http').createServer(app.callback());
 const PORT = process.env.PORT || 8081;
 
-http.listen(PORT, () => {
+const server = http.listen(PORT, () => {
     console.log('Listening on ' + PORT);
 });
 
 /// Requires the socket functions
 require('./server/sockets')(http);
+
+/// Exporting the server for the tests
+module.exports = server;

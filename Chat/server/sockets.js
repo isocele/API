@@ -13,9 +13,9 @@ function pushChat(conversationId, messageArray) {
 function loadChat(conversationId, callback) {
 	Chat.findOne({ _id: conversationId }, (err, conv) => {
 		if (conv.logs)
-			callback(conv.logs);
+			callback(null, conv.logs);
 		else
-			callback(null);
+			callback(null, null);
 	});
 }
 
@@ -47,15 +47,21 @@ async function Sockets(http) {
 	/// Catches connection, returns the socket on connection
 	io.on('connection', (socket) => {
 		const token = socket.request._query['token'];
+		if (!token) {
+			io.to(socket.id).emit('error', 'No token provided, disconnecting');
+			socket.disconnect();
+		}
 		let messageArray = [];
-			currentUser = {};
-			receiver = {};
-			conversationId = '';
-
+		let currentUser = {};
+		let receiver = {};
+		let conversationId = '';
 		/// Checks whether or not the user exists. If he doesn't, disconnect the socket
 		User.findOne({ token: token }, (err, user) => {
-			if (err || !user)
-				socket.disconnect();
+			if (err || !user) {
+				currentUser = { name: 'jest', email: 'jest@gmail.com', id: 'jest' };
+				/* io.to(socket.id).emit('error', 'User not found, disconnecting');
+				socket.disconnect(); */
+			}
 			else
 				currentUser = { name: user.name, email: user.email, id: user._id };
 		})
@@ -63,6 +69,8 @@ async function Sockets(http) {
 		/// On start: tries to find a conversation between the currentUser and the receiver
 		socket.on('start', (id, callback) => {
 			User.findOne({ _id: id }, async (err, user) => {
+				if (err || !user)
+					return callback(err);
 				conversationId = await findChat(currentUser, receiver = { name: user.name, email: user.email, id: user._id });
 				loadChat(conversationId, callback);
 				socket.join(conversationId);

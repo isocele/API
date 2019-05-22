@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest --coverage --runInBand --detectOpenHandles --forceExit",
     "start": "set NODE_ENV=dev&& nodemon main",
     "unix": "NODE_ENV=dev nodemon main",
     "prod": "NODE_ENV=prod nodemon main"
@@ -16,5 +16,12 @@
     "koa-router": "^7.4.0",
     "mongoose": "^5.5.2",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "expect": "^24.8.0",
+    "jest": "^24.8.0",
+    "socket.io-client": "^2.2.0",
+    "supertest": "^4.0.2"
   }
 }
