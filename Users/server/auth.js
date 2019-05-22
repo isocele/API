@@ -95,7 +95,7 @@ async function Users(router, User) {
 		if (!q.token)
 			return await setCtx(ctx, 400, 'Error: Missing parameters');
 		let user = await User.findOne({ token: q.token });
-		if (!user || user.token != q.token)
+		if (!user)
 			return await setCtx(ctx, 400, 'Error: Wrong token');
 		user.active = true;
 		await user.save();

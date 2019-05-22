@@ -70,13 +70,7 @@ async function Users(router, User) {
 
 	/// Deletes the user's account, requires authentication
 	router.post('/delete', checkToken, async (ctx) => {
-		let q = ctx.request.body;
-		if (!q.email)
-			return await setCtx(ctx, 400, "Error: Missing parameters");
-		let user = await User.findOne({ email: q.email });
-		if (!user)
-			return await setCtx(ctx, 400, 'Error: User does not exist');
-		await User.deleteOne({ email: q.email });
+		await User.deleteOne({ email: ctx.user.email });
 		return await setCtx(ctx, 200, 'User removed!');
 	});
 

@@ -4,7 +4,7 @@
   "description": "Epicare's API",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
+    "test": "NODE_ENV=test jest --coverage --runInBand --detectOpenHandles --forceExit",
     "testWindows": "set NODE_ENV=test&& jest --runInBand --detectOpenHandles --forceExit",
     "start": "set NODE_ENV=dev&& nodemon main",
     "unix": "NODE_ENV=dev nodemon main",

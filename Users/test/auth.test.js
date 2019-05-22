@@ -69,6 +69,56 @@ describe('Succesfull login', () => {
     })
 });
 
+describe('Login with wrong password', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .post('/login')
+        .send({
+            email: 'jest@gmail.com',
+            password: 'jest'
+        })
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(400);
+        done();
+    })
+});
+
+describe('Confirm account', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .post('/confirm')
+        .query({
+            token
+        })
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(200);
+        done();
+    })
+});
+
+describe('Confirm with a wrong token', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .post('/confirm')
+        .query({
+            token: 'im a token'
+        })
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(400);
+        done();
+    })
+});
+
+describe('Confirm account without token', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .post('/confirm')
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(400);
+        done();
+    })
+});
+
 describe('Get Reset password', () => {
     test('should respond as expected', async (done) => {
         const response = await request(server)
@@ -82,10 +132,37 @@ describe('Get Reset password', () => {
     })
 });
 
-describe('Get profile not authenticated', () => {
+describe('Get reset with missing parameters', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .get('/reset')
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(400);
+        done();
+    })
+});
+
+describe('Get profile without a token', () => {
     test('should respond as expected', async (done) => {
         const response = await request(server)
         .get('/profile')
+        .send({
+            email: 'jest@gmail.com',
+            password: 'jesttest'
+        })
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(403);
+        done();
+    })
+});
+
+describe('Get profile with a wrong token', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .get('/profile')
+        .query({
+            token: 'im a token'
+        })
         .send({
             email: 'jest@gmail.com',
             password: 'jesttest'
@@ -167,6 +244,22 @@ describe('Post Reset password', () => {
     })
 });
 
+describe('Reset password with missing parameters', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .post('/reset')
+        .query({
+            id: id
+        })
+        .send({
+            email: 'jest@gmail.com'
+        })
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(400);
+        done();
+    })
+});
+
 describe('Login after password reset', () => {
     test('should respond as expected', async (done) => {
         const response = await request(server)
@@ -189,9 +282,6 @@ describe('Succesfull delete', () => {
         .query({
             token: token
         })
-        .send({
-            email: 'jest@gmail.com'
-        })
         .set('Content-Type', 'application/json');
         expect(response.status).toEqual(200);
         done();
@@ -205,4 +295,18 @@ describe('Login without query', () => {
         expect(response.status).toEqual(400);
         done();
     });
+});
+
+describe('Login unknown user', () => {
+    test('should respond as expected', async (done) => {
+        const response = await request(server)
+        .post('/login')
+        .send({
+            email: 'jest@gmail.com',
+            password: 'jesttest'
+        })
+        .set('Content-Type', 'application/json');
+        expect(response.status).toEqual(400);
+        done();
+    })
 });
