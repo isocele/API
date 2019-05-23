@@ -26,6 +26,7 @@ app.listen(PORT);
 /// Creating default route
 router.post('/', async (ctx) => {
     ctx.status = 200;
+    console.log(ctx.body.payload);
     let exec = require('child_process').exec;
 
     exec('./reload.sh',
