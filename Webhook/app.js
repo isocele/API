@@ -28,7 +28,7 @@ router.post('/', async (ctx) => {
     ctx.status = 200;
     console.log(ctx.request);
     console.log(ctx.body);
-    let exec = require('child_process').exec;
+    //let exec = require('child_process').exec;
 
     /*exec('./reload.sh',
         function (error, stdout, stderr) {
