@@ -27,6 +27,7 @@ app.listen(PORT);
 router.post('/', async (ctx) => {
 
     if (ctx.request.body.pull_request.base.ref === "master" && ctx.request.body.action === "closed") {
+        console.log("Merge accepted on master, reloading all servers");
         let exec = require('child_process').exec;
         exec('./reload.sh',
             function (error, stdout, stderr) {
