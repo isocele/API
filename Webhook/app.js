@@ -25,20 +25,19 @@ app.listen(PORT);
 
 /// Creating default route
 router.post('/', async (ctx) => {
-    ctx.status = 200;
-    console.log(ctx.request.body.pull_request.base.ref);
-    console.log(ctx.request.body.action)
-    //let exec = require('child_process').exec;
 
-    /*exec('./reload.sh',
-        function (error, stdout, stderr) {
-            console.log('stdout: ' + stdout);
-            console.log('stderr: ' + stderr);
-            if (error !== null) {
-                console.log('exec error: ' + error);
-            }
+    if (ctx.request.body.pull_request.base.ref === "master" && ctx.request.body.action === "closed") {
+        let exec = require('child_process').exec;
+        exec('./reload.sh',
+            function (error, stdout, stderr) {
+                console.log('stdout: ' + stdout);
+                console.log('stderr: ' + stderr);
+                if (error !== null) {
+                    console.log('exec error: ' + error);
+                }
 
-        });*/
+            });
+    }
 });
 
 router.get('/', async (ctx) => {
