@@ -16,11 +16,11 @@ async function Users(router, User) {
     async function checkToken(ctx, next) {
         let token = ctx.query.token;
         if (!token) {
-            return await setCtx(ctx, 400, 'Error: You need to be authenticated');
+            return await setCtx(ctx, 403, 'Error: You need to be authenticated');
         }
         let user = await User.findOne({token: token});
         if (!user)
-            return await setCtx(ctx, 400, 'Error: User not found');
+            return await setCtx(ctx, 403, 'Error: Wrong token');
         else {
             ctx.user = user;
             return next();
@@ -45,6 +45,7 @@ async function Users(router, User) {
         }
     }); */
 
+    /// Gets the user's personnal informations
     router.get('/profile', checkToken, async (ctx) => {
         let user = ctx.user;
         let returnedUser = {
@@ -52,18 +53,32 @@ async function Users(router, User) {
             last_name: user.last_name,
             email: user.email,
             type: user.type,
-            contacts: user.contacts
+            contacts: user.contacts,
+            id: user._id
         };
         return await setCtx(ctx, 200, returnedUser);
     });
 
-    router.put('/profile', checkToken,async (ctx) => {
+    /// Modifies the user's personnal informations, requires authentication
+    router.put('/profile', checkToken, async (ctx) => {
         let user = ctx.user;
         let body = ctx.request.body;
         await User.updateOne({_id: user._id}, {name: body.name, last_name: body.last_name, email: body.email});
         let modifiedUser = await User.findOne({_id: user._id});
         return await setCtx(ctx, 200, modifiedUser);
     });
+
+	/// Deletes the user's account, requires authentication
+	router.post('/delete', checkToken, async (ctx) => {
+		let q = ctx.request.body;
+		if (!q.email)
+			return await setCtx(ctx, 400, "Error: Missing parameters");
+		let user = await User.findOne({ email: q.email });
+		if (!user)
+			return await setCtx(ctx, 400, 'Error: User does not exist');
+		await User.deleteOne({ email: q.email });
+		return await setCtx(ctx, 200, 'User removed!');
+	});
 
     return User;
 }
