@@ -1,4 +1,4 @@
-# Auth
+# Prescriptions
 ## Upload
 Allows the user to upload a prescriptions picture.
 

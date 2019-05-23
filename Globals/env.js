@@ -12,7 +12,7 @@ let environments = {
 	dev: {
 		mongo: 'mongodb://epicare.fr:27017/epicare_test',
 		logger: true,
-        mail: false,
+        mail: true,
         socketOrigins: '*:*'
 	},
 	test: {
